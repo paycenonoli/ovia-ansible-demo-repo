@@ -1,5 +1,5 @@
 ---
-- name: Install and configure NGINX
+- name: Uninstall and remove NGINX
   hosts: webservers
   become: yes  # Escalate privileges to perform admin-level tasks
   tasks:
@@ -7,15 +7,14 @@
       apt:
         update_cache: yes
 
-    - name: Install NGINX
+    - name: Uninstall NGINX
       apt:
         name: nginx
-        state: present
+        state: absent
 
-    - name: Ensure NGINX is started and enabled at boot
+    - name: Ensure NGINX is stopped and disabled 
       service:
         name: nginx
-        state: started
-        enabled: yes
+        state: stopped
+        enabled: no
         
-
