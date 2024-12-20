@@ -1,0 +1,20 @@
+---
+- name: Install and configure NGINX
+  hosts: webservers
+  become: yes  # Escalate privileges to perform admin-level tasks
+  tasks:
+    - name: Update the package cache
+      apt:
+        update_cache: yes
+
+    - name: Install NGINX
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure NGINX is started and enabled at boot
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
